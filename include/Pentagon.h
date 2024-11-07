@@ -65,11 +65,15 @@ public:
     }
 
     operator double() const {
-        double sum1 = p1->x * p2->y + p2->x * p3->y + p3->x * p4->y + p4->x * p5->y + p5->x * p1->y;
-        double sum2 = p1->y * p2->x + p2->y * p3->x + p3->y * p4->x + p4->y * p5->x + p5->y * p1->x;
-        double area = std::abs(sum1 - sum2) / 2.0;
-        return area;
-    }
+    double area = 0.0;
+    area += p1->x * p2->y - p1->y * p2->x;
+    area += p2->x * p3->y - p2->y * p3->x;
+    area += p3->x * p4->y - p3->y * p4->x;
+    area += p4->x * p5->y - p4->y * p5->x;
+    area += p5->x * p1->y - p5->y * p1->x;
+    return std::abs(area) / 2.0;
+}
+
     
     bool operator== (const Pentagon &other) const {
             return *p1 == *other.p1 && *p2 == *other.p2 && *p3 == *other.p3 && *p4 == *other.p4 && *p5 == *other.p5;
@@ -122,5 +126,6 @@ public:
         return in;
     }
 };
+
 
 #endif // PENTAGON_H

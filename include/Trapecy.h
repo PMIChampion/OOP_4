@@ -65,17 +65,16 @@ public:
         return mid;
     }
 
-    double area() const {
-    double a = (*p1 - *p2).magnitude(); 
-    double b = (*p3 - *p4).magnitude(); 
+    
 
-    double height = std::abs(p1->y - p3->y); 
-    return (a + b) * height / 2.0;
+    operator double() const{
+    double area = 0.0;
+    area += p1->x * p2->y - p1->y * p2->x;
+    area += p2->x * p3->y - p2->y * p3->x;
+    area += p3->x * p4->y - p3->y * p4->x;
+    area += p4->x * p1->y - p4->y * p1->x;
+    return std::abs(area) / 2.0;
 }
-
-    operator double() const  {
-        return area();
-    }
 
     bool operator==(const Trapecy<T>& other) const {
         return *p1 == *other.p1 && *p2 == *other.p2 && *p3 == *other.p3 && *p4 == *other.p4;
@@ -123,5 +122,7 @@ public:
         return in;
     }
 };
+
+
 
 #endif // TRAPECY_H
